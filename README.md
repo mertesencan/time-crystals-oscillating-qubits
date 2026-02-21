@@ -8,7 +8,6 @@ Numerical simulations and Liouvillian spectral analysis of dissipative time crys
   <img src="./figures/bhd_phase_kick.gif" width="600">
 </p>
 
-
 This repository contains the numerical simulations and Liouvillian spectral analysis underlying our study of dissipative time-crystalline phases in the driven–dissipative Bose–Hubbard dimer (BHD).
 
 We show that the time-crystalline phase hosts a long-lived oscillatory mode corresponding to a noiseless subsystem, enabling passive protection of an oscillating qubit encoded in the Liouvillian spectrum.
@@ -23,16 +22,13 @@ The GIF shows the response of the BDH time-crystalline state to a phase kick.
 - Dense exact diagonalization  
 - Script containing CPU implementation (NumPy / SciPy) GPU implementation (PyTorch)
 
-The repository includes the parameter set used in the paper for:
+The repository includes the eigenstates for the parameter set used in the paper for:
 
 F = 1.8, N = 1
 
 Eigenvectors for other drive strengths (F) and scaling values (N) can be generated directly using the provided scripts.
 
----
-
-### 2. Sparse Spectral Computations (Cluster)
-
+### 2. Sparse Spectral Computations
 - Sparse Liouvillian construction  
 - Krylov / ARPACK-based eigensolvers  
 - Designed for cluster-scale simulations  
@@ -40,28 +36,6 @@ Eigenvectors for other drive strengths (F) and scaling values (N) can be generat
 All sparse eigenpairs used in the paper are included, which were obtained using the High Performance Compute (HPC) compute cluster at the Advanced Research Computing (ARC) services provided to University of Oxford.
 
 These correspond to the isolated imaginary eigenmodes responsible for time-crystalline oscillations and their finite-size scaling behavior.
-
----
-
-### 3. Eigenstate Visualization
-
-- Reconstruction of density matrices from eigenvectors  
-- Observable projections  
-- Symmetry-sector analysis  
-- Visualization of oscillatory eigenoperators  
-
-These tools allow direct inspection of the Liouvillian eigenoperators forming the oscillatory qubit subspace.
-
----
-
-### 4. Time Evolution
-
-- Direct Lindblad master-equation evolution  
-- Phase-kick protocol simulations  
-- Extraction of oscillation frequency and decay rates  
-
-This connects the spectral structure to real-time dynamics and demonstrates the emergence of a dynamically protected oscillatory mode.
-
 
 ## Environment Setup
 
