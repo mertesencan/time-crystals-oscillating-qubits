@@ -1,3 +1,26 @@
+"""
+================================================================================
+Project: Time-Crystals as Oscillating Qubits
+Created by: Mert Esencan
+Repository: https://github.com/mertesencan/time-crystals-oscillating-qubits
+
+Description:
+    Core source code supporting the results in the manuscript
+    “Dissipative Time Crystals as Passively Protected Oscillating Qubits” 
+    by Mert Esencan, Alex I. Lvovsky, and Berislav Buča. This implementation
+    reproduces the oscillating qubit / discrete time-crystal phenomena
+    and was used for experiments and figures in the paper submission.
+
+Usage Notes:
+    • This code is provided “as is” for research and verification.
+    • See the associated manuscript for experimental setup, parameter
+      choices, and analysis procedures.
+    • Citation: Please see manuscript submission.
+
+================================================================================
+"""
+
+
 
 import torch
 import numpy as np
@@ -79,6 +102,28 @@ def get_torch_eigspectra_all(L_symmetry, symmetry, cutoff_A, cutoff_B):
 
     return sorted_eigenvalues, sorted_eigenvectors
 
+def normalize_and_align_eigenvectors_numpy(eigenvectors: np.ndarray, tol=1e-12):
+    # Convert to complex (in case input is float)
+    vecs = eigenvectors.astype(np.complex128, copy=True)
+
+    # Normalize each column to have norm 1
+    norms = np.linalg.norm(vecs, axis=0)
+    norms[norms == 0] = 1.0  # avoid div-by-zero if any col is zero
+    vecs /= norms
+
+    # Align phase: for each column, find the first nonzero element
+    # and rotate so that element is real and positive.
+    nonzero_mask = np.abs(vecs) > tol
+    first_indices = np.argmax(nonzero_mask, axis=0)  # index of first True per col
+
+    # compute phases
+    phases = np.angle(vecs[first_indices, np.arange(vecs.shape[1])])
+    # rotate each column by exp(-i * phase)
+    # shape broadcasting: phases is (k,), so we add a new axis for row dimension (None)
+    vecs *= np.exp(-1j * phases)[None, :]
+
+    return vecs
+
 
 def get_torch_eigspectra_all_numpy(L_symmetry, symmetry, cutoff_A, cutoff_B, k=2, algo_type='LR'):
     # Compute the matrix dimension (assuming the same reshape as before)
@@ -108,6 +153,8 @@ def get_torch_eigspectra_all_numpy(L_symmetry, symmetry, cutoff_A, cutoff_B, k=2
     print("CPU memory usage: {:.2f} MB".format(mem_MB))
     
     print(symmetry, "eig_val", np.round(sorted_eigenvalues[-1], 8))
+
+    sorted_eigenvectors = normalize_and_align_eigenvectors_numpy(sorted_eigenvectors)
     
     # Convert the results back to torch tensors
     sorted_eigenvalues_torch = torch.from_numpy(sorted_eigenvalues)
