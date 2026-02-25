@@ -1,6 +1,6 @@
 # Dissipative Time Crystals as Passively Protected Oscillating Qubits
 
-**arXiv:** https://arxiv.org/abs/XXXX.XXXXX *(placeholder)*
+**arXiv:** https://arxiv.org/abs/2602.20269
 
 Numerical simulations and Liouvillian spectral analysis of dissipative time crystals and passive quantum error protection in the driven-dissipative Bose–Hubbard dimer.
 
