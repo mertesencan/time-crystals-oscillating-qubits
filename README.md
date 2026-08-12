@@ -50,3 +50,13 @@ conda create -n myenv python=3.13.2
 conda activate myenv
 conda install --file conda-spec.txt
 pip install -r requirements.txt
+
+## Branch tables (v2)
+
+`data/branch-tables/` holds the two-anchor tracked eigenvalue branches used for the dense lines of Figs. 1 and 3 of the paper. Drive grid: base step 0.02 over F = 0.1 to 2.0 (0.05 over 0.2 to 2.0 at N = 50), plus added points including the operating drive F* = 1.23.
+
+- `lam_N{10,20,40}.csv`: slow coherence eigenvalue per branch, columns F, Re_low, Im_low, Re_high, Im_high (in units of the loss rate).
+- `nb_N{10,20,40}.csv`: condensate order parameter, columns F, nB_over_N.
+- `n4sweep_summary.csv`: N = 4 exact sweep, both branches, with overlap diagnostics.
+- `n{10,20,40,50}k8line_dist*.csv`: normalized Hilbert-Schmidt distances along the tracked branch, columns F, branch, d_pp_mm (sector distance), d_pp_pm (even-odd distance), at the antibonding cutoff K_A = 8.
+- `n{40,50}k8line_qubit.csv`: distances together with the branch eigenvalue (lam_re, lam_im) and trace diagnostics.
