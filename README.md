@@ -14,6 +14,12 @@ We show that the time-crystalline phase hosts a long-lived oscillatory mode corr
 
 The GIF shows the response of the BDH time-crystalline state to a phase kick.
 
+<p align="center">
+  <img src="./figures/drive_sweep.gif" width="600">
+</p>
+
+The second animation sweeps the drive across the dissipative phase transition at N = 40: the bonding condensate switches on and marches out while the dark qubit mode stays microscopic.
+
 ## Repository Contents
 
 ### 1. Exact Diagonalization (Dense)
